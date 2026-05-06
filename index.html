@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Holmes: The Final Case</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #050505;
+      color: #f2f2f2;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 35%),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 60px 60px, 60px 60px;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle, transparent 55%, rgba(0,0,0,0.9));
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      border-bottom: 2px solid #b08a32;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+      background: rgba(5,5,5,0.88);
+      border-bottom: 1px solid rgba(176,138,50,0.45);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: #d1a84d;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 24px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #f2f2f2;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #d1a84d;
+    }
+
+    .hero-content {
+      max-width: 950px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 1px solid #d1a84d;
+      color: #d1a84d;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      background: rgba(0,0,0,0.55);
+    }
+
+    h1 {
+      font-size: clamp(44px, 8vw, 96px);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px rgba(255,255,255,0.15);
+    }
+
+    .hero-content h1 span {
+      color: #d1a84d;
+    }
+
+    .hero-content p {
+      max-width: 760px;
+      margin: 28px auto;
+      font-size: 20px;
+      line-height: 1.8;
+      color: #cfcfcf;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 14px 30px;
+      border: 1px solid #d1a84d;
+      color: #d1a84d;
+      background: transparent;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #d1a84d;
+      color: #050505;
+      transform: translateY(-3px);
+    }
+
+    .btn.dark {
+      border-color: #f2f2f2;
+      color: #f2f2f2;
+    }
+
+    .btn.dark:hover {
+      background: #f2f2f2;
+      color: #050505;
+    }
+
+    section {
+      padding: 95px 8%;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(32px, 5vw, 58px);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #f2f2f2;
+    }
+
+    .section-title p {
+      margin-top: 15px;
+      color: #d1a84d;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .text-box {
+      background: rgba(255,255,255,0.04);
+      padding: 34px;
+      border: 1px solid rgba(209,168,77,0.35);
+      box-shadow: 0 0 30px rgba(0,0,0,0.45);
+    }
+
+    .text-box h3 {
+      color: #d1a84d;
+      margin-bottom: 18px;
+      font-size: 28px;
+      text-transform: uppercase;
+    }
+
+    .text-box p, .text-box li {
+      color: #d8d8d8;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    .text-box ul {
+      padding-left: 20px;
+    }
+
+    .frame {
+      min-height: 360px;
+      border: 2px solid #d1a84d;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(0,0,0,0.4)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .frame::before {
+      content: "☽";
+      position: absolute;
+      font-size: 260px;
+      color: rgba(255,255,255,0.04);
+    }
+
+    .frame strong {
+      font-size: 34px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #f2f2f2;
+      z-index: 2;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(209,168,77,0.4);
+      padding: 30px;
+      min-height: 260px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      background: rgba(209,168,77,0.08);
+    }
+
+    .icon {
+      font-size: 42px;
+      color: #d1a84d;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      color: #f2f2f2;
+      margin-bottom: 15px;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      color: #c9c9c9;
+      line-height: 1.7;
+    }
+
+    .timeline {
+      max-width: 950px;
+      margin: auto;
+      position: relative;
+    }
+
+    .case-step {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 25px;
+      margin-bottom: 30px;
+      align-items: start;
+    }
+
+    .number {
+      width: 70px;
+      height: 70px;
+      border: 1px solid #d1a84d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d1a84d;
+      font-size: 24px;
+      border-radius: 50%;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .gallery-item {
+      min-height: 230px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background:
+        linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.7)),
+        repeating-linear-gradient(90deg, #1a1a1a 0 8px, #111 8px 16px);
+      display: flex;
+      align-items: end;
+      padding: 20px;
+      color: #d1a84d;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: 0.3s;
+    }
+
+    .gallery-item:hover {
+      filter: brightness(1.25);
+      border-color: #d1a84d;
+    }
+
+    .team {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .member {
+      text-align: center;
+      border: 1px solid rgba(209,168,77,0.35);
+      padding: 24px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .avatar {
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      border: 1px solid #d1a84d;
+      background: radial-gradient(circle, #333, #050505);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d1a84d;
+      font-size: 34px;
+    }
+
+    .member h3 {
+      color: #f2f2f2;
+      margin-bottom: 8px;
+    }
+
+    .member p {
+      color: #bfbfbf;
+      font-size: 14px;
+    }
+
+    .contact-box {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+      padding: 45px;
+      border: 1px solid #d1a84d;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .contact-box h3 {
+      font-size: 34px;
+      color: #d1a84d;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px;
+      color: #aaa;
+      background: #030303;
+      border-top: 1px solid rgba(209,168,77,0.45);
+    }
+
+    .fog {
+      position: absolute;
+      width: 160%;
+      height: 180px;
+      bottom: 0;
+      left: -30%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      filter: blur(20px);
+      animation: fogMove 8s infinite alternate ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fogMove {
+      from { transform: translateX(-80px); }
+      to { transform: translateX(80px); }
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 14px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      .grid-2,
+      .cards,
+      .gallery,
+      .team {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 75px 6%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Holmes</div>
+    <ul>
+      <li><a href="#story">Histoire</a></li>
+      <li><a href="#gameplay">Gameplay</a></li>
+      <li><a href="#world">Univers</a></li>
+      <li><a href="#media">Galerie</a></li>
+      <li><a href="#team">Équipe</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="hero-content">
+      <div class="badge">Jeu 2D • Monochrome • Enquête</div>
+      <h1>Holmes:<br><span>The Final Case</span></h1>
+      <p>
+        Entrez dans une aventure 2D sombre inspirée de l’univers victorien de Sherlock Holmes. Courez, observez, évitez les obstacles, collectez les indices et résolvez la dernière affaire.
+      </p>
+      <div class="buttons">
+        <a class="btn" href="#story">Découvrir le jeu</a>
+        <a class="btn dark" href="#gameplay">Voir le gameplay</a>
+      </div>
+    </div>
+    <div class="fog"></div>
+  </header>
+
+  <section id="story">
+    <div class="section-title">
+      <h2>L'histoire</h2>
+      <p>Une dernière enquête dans les rues sombres de Londres</p>
+    </div>
+    <div class="grid-2">
+      <div class="text-box">
+        <h3>Le mystère</h3>
+        <p>
+          Dans une ville plongée dans le brouillard, un crime étrange menace Londres. Le joueur incarne un détective qui doit avancer dans les rues, inspecter les lieux, récupérer les preuves et comprendre la vérité avant qu’il ne soit trop tard.
+        </p>
+        <br>
+        <p>
+          Chaque niveau représente une partie de l’enquête : la rue, le laboratoire, les archives, la scène de crime et enfin le lieu du dernier affrontement intellectuel.
+        </p>
+      </div>
+      <div class="frame">
+        <strong>London<br>Final Case<br>1889</strong>
+      </div>
+    </div>
+  </section>
+
+  <section id="gameplay">
+    <div class="section-title">
+      <h2>Gameplay</h2>
+      <p>Courir • Inspecter • Résoudre</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">▶</div>
+        <h3>Déplacement 2D</h3>
+        <p>Le personnage avance dans un environnement latéral. Le joueur doit sauter, éviter les obstacles et garder son rythme comme dans un jeu de plateforme.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⌕</div>
+        <h3>Inspection</h3>
+        <p>Grâce à la loupe, le joueur peut analyser certains objets, déclencher des indices cachés et avancer dans l’enquête.</p>
+      </div>
+      <div class="card">
+        <div class="icon">?</div>
+        <h3>Énigmes</h3>
+        <p>Les niveaux contiennent des puzzles, des quiz et des indices à assembler pour découvrir l’identité du coupable.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="world">
+    <div class="section-title">
+      <h2>Univers graphique</h2>
+      <p>Noir • Blanc • Gris • Or antique</p>
+    </div>
+    <div class="grid-2">
+      <div class="frame">
+        <strong>Style<br>Monochrome<br>Victorien</strong>
+      </div>
+      <div class="text-box">
+        <h3>Direction artistique</h3>
+        <ul>
+          <li>Style 2D plat, sans réalisme et sans profondeur excessive.</li>
+          <li>Palette monochrome : noir, blanc, gris, avec accents or antique.</li>
+          <li>Ambiance sombre, gothique, mystérieuse et policière.</li>
+          <li>Décors inspirés des rues de Londres, du brouillard et des enquêtes victoriennes.</li>
+          <li>Interface simple : cœurs de vie, timer, score, indices et loupe.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="cases">
+    <div class="section-title">
+      <h2>Progression</h2>
+      <p>Les étapes de l'enquête</p>
+    </div>
+    <div class="timeline">
+      <div class="case-step">
+        <div class="number">01</div>
+        <div class="text-box">
+          <h3>La scène de crime</h3>
+          <p>Le joueur découvre le premier indice et apprend les commandes principales.</p>
+        </div>
+      </div>
+      <div class="case-step">
+        <div class="number">02</div>
+        <div class="text-box">
+          <h3>Les rues de Londres</h3>
+          <p>Le joueur traverse des obstacles, évite les dangers et récupère des preuves cachées.</p>
+        </div>
+      </div>
+      <div class="case-step">
+        <div class="number">03</div>
+        <div class="text-box">
+          <h3>Le laboratoire</h3>
+          <p>Les indices sont analysés à travers des mini-jeux et des énigmes logiques.</p>
+        </div>
+      </div>
+      <div class="case-step">
+        <div class="number">04</div>
+        <div class="text-box">
+          <h3>La révélation finale</h3>
+          <p>Le joueur rassemble les preuves et découvre la vérité derrière l’affaire finale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="media">
+    <div class="section-title">
+      <h2>Galerie</h2>
+      <p>Assets, interfaces et supports visuels</p>
+    </div>
+    <div class="gallery">
+      <div class="gallery-item">Background 2D</div>
+      <div class="gallery-item">Personnage</div>
+      <div class="gallery-item">Health Bar</div>
+      <div class="gallery-item">Flyer</div>
+      <div class="gallery-item">Badge</div>
+      <div class="gallery-item">Stickers</div>
+      <div class="gallery-item">Contrôleur</div>
+      <div class="gallery-item">Logo</div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="section-title">
+      <h2>Équipe</h2>
+      <p>Les créateurs du projet</p>
+    </div>
+    <div class="team">
+      <div class="member"><div class="avatar">L</div><h3>Linda Zlizi</h3><p>Design & Développement</p></div>
+      <div class="member"><div class="avatar">D</div><h3>Donia Chaabeni</h3><p>Communication</p></div>
+      <div class="member"><div class="avatar">A</div><h3>Amine Bettaeib</h3><p>Gameplay</p></div>
+      <div class="member"><div class="avatar">L</div><h3>Lina Hamrouni</h3><p>Présentation</p></div>
+      <div class="member"><div class="avatar">T</div><h3>Tasnim Aloui</h3><p>Recherche</p></div>
+      <div class="member"><div class="avatar">D</div><h3>Dhia Souli</h3><p>Développement</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-box">
+      <h3>Ready to solve the case?</h3>
+      <p>
+        Holmes: The Final Case est un projet de jeu vidéo 2D qui combine enquête, plateforme, énigmes et identité visuelle monochrome.
+      </p>
+      <br><br>
+      <a class="btn" href="mailto:linda.zlizi@esprit.tn">Contacter l'équipe</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Holmes: The Final Case — 2D Sherlock Game Project</p>
+  </footer>
+
+  <script>
+    const cards = document.querySelectorAll('.card, .member, .gallery-item, .text-box');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(25px)';
+      card.style.transition = '0.7s ease';
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>
