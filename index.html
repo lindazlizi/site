@@ -158,7 +158,7 @@
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 2px;
-      transition: 0.3s;
+      transition:0.2s;
       cursor: pointer;
     }
 
@@ -542,6 +542,120 @@
       }
     }
 
+    .trailer-box {
+      max-width: 900px;
+      margin: auto;
+      border: 1px solid #d1a84d;
+      background: rgba(255,255,255,0.04);
+      padding: 35px;
+      text-align: center;
+      box-shadow: 0 0 35px rgba(0,0,0,0.55);
+    }
+
+    .video-placeholder {
+      height: 420px;
+      border: 1px solid rgba(209,168,77,0.45);
+      background:
+        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.8)),
+        url('assets/background.png') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .play-button {
+      width: 90px;
+      height: 90px;
+      border: 1px solid #d1a84d;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d1a84d;
+      font-size: 42px;
+      background: rgba(0,0,0,0.6);
+      transition: 0.3s;
+    }
+
+    .video-placeholder:hover .play-button {
+      background: #d1a84d;
+      color: #050505;
+      transform: scale(1.1);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 35px;
+    }
+
+    .stat {
+      border: 1px solid rgba(209,168,77,0.35);
+      padding: 22px;
+      background: rgba(255,255,255,0.04);
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      color: #d1a84d;
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .stat span {
+      color: #cfcfcf;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 13px;
+    }
+
+    .faq-box {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .faq-item {
+      border: 1px solid rgba(209,168,77,0.35);
+      background: rgba(255,255,255,0.04);
+      margin-bottom: 16px;
+      padding: 22px;
+      cursor: pointer;
+    }
+
+    .faq-question {
+      color: #d1a84d;
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .faq-answer {
+      display: none;
+      color: #d8d8d8;
+      line-height: 1.8;
+      margin-top: 15px;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .lightbox-img {
+      width: 90%;
+      max-width: 900px;
+      max-height: 80vh;
+      object-fit: contain;
+      border: 1px solid #d1a84d;
+      background: #050505;
+      padding: 10px;
+    }
+
     .popup {
       display: none;
       position: fixed;
@@ -619,12 +733,20 @@
       .cards,
       .gallery,
       .buy-grid,
+      .stats,
       .team {
         grid-template-columns: 1fr;
       }
 
       section {
         padding: 75px 6%;
+      }
+      .video-placeholder {
+        width: 100%;
+        height: 420px;
+        object-fit: cover;
+        border: 1px solid rgba(209,168,77,0.45);
+        background: #000;
       }
     }
   </style>
@@ -639,6 +761,7 @@
       <li><a href="#gameplay">Gameplay</a></li>
       <li><a href="#world">Univers</a></li>
       <li><a href="#media">Galerie</a></li>
+      <li><a href="#trailer">Trailer</a></li>
       <li><a class="buy-link" href="#buy">Acheter</a></li>
       <li><a href="#team">Équipe</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -659,6 +782,7 @@
       <div class="buttons">
         <a class="btn" href="#story">Découvrir le jeu</a>
         <a class="btn dark" href="#buy">Voir les offres GD3</a>
+        <a class="btn" href="#trailer">Voir le trailer</a>
       </div>
     </div>
 
@@ -690,7 +814,7 @@
       </div>
 
       <div class="frame">
-        <strong>London<br>Final Case<br>1897</strong>
+        <strong>London<br>Final Case<br>1889</strong>
       </div>
     </div>
   </section>
@@ -788,6 +912,48 @@
     </div>
   </section>
 
+  <section id="trailer">
+    <div class="section-title">
+      <h2>Trailer & Demo</h2>
+      <p>Watch the atmosphere of the final case</p>
+    </div>
+
+    <div class="trailer-box">
+      <video controls class="video-placeholder">
+
+        <source src="assets/trailer.mp4" type="video/mp4">
+
+      </video>
+
+      <p>
+        This section is dedicated to the final gameplay capsule, including the intro,
+        the gameplay demo, puzzle moments and the final presentation of the project.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>2D</strong>
+          <span>Game Style</span>
+        </div>
+
+        <div class="stat">
+          <strong>6</strong>
+          <span>Team Members</span>
+        </div>
+
+        <div class="stat">
+          <strong>GD3</strong>
+          <span>Special Deal</span>
+        </div>
+
+        <div class="stat">
+          <strong>QR</strong>
+          <span>Website Access</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="media">
     <div class="section-title">
       <h2>Galerie</h2>
@@ -796,32 +962,32 @@
 
     <div class="gallery">
       <div class="gallery-card">
-        <img src="logo.png" alt="Logo du jeu">
+        <img src="assets/logo.png" alt="Logo du jeu" onclick="openLightbox('assets/logo.png')">
         <h3>Logo du jeu</h3>
       </div>
 
       <div class="gallery-card">
-        <img src="flyer.png" alt="Flyer promotionnel">
+        <img src="assets/flyer.png" alt="Flyer promotionnel" onclick="openLightbox('assets/flyer.png')">
         <h3>Flyer promotionnel</h3>
       </div>
 
       <div class="gallery-card">
-        <img src="background.png" alt="Background 2D">
+        <img src="assets/background.png" alt="Background 2D" onclick="openLightbox('assets/background.png')">
         <h3>Background 2D</h3>
       </div>
 
       <div class="gallery-card">
-        <img src="stickers.png" alt="Stickers">
+        <img src="assets/stickers.png" alt="Stickers" onclick="openLightbox('assets/stickers.png')">
         <h3>Stickers</h3>
       </div>
 
       <div class="gallery-card">
-        <img src="controller.png" alt="Contrôleur Sherlock">
+        <img src="assets/controller.png" alt="Contrôleur Sherlock" onclick="openLightbox('assets/controller.png')">
         <h3>Contrôleur</h3>
       </div>
 
       <div class="gallery-card">
-        <img src="badges.png" alt="Badges équipe">
+        <img src="assets/badges.png" alt="Badges équipe" onclick="openLightbox('assets/badges.png')">
         <h3>Badges équipe</h3>
       </div>
     </div>
@@ -913,6 +1079,30 @@
     </div>
   </section>
 
+  <section id="faq">
+    <div class="section-title">
+      <h2>Case Questions</h2>
+      <p>Information for visitors and jury members</p>
+    </div>
+
+    <div class="faq-box">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">What type of game is it?</div>
+        <div class="faq-answer">Holmes: The Final Case is a 2D detective platform game combining movement, obstacles, clues, quizzes and investigation mechanics.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">What is special about the visual style?</div>
+        <div class="faq-answer">The game uses a monochrome Victorian direction inspired by Sherlock Holmes, with black, white, gray and antique gold details.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">How can visitors access the website?</div>
+        <div class="faq-answer">Visitors can scan the QR code displayed on the flyer, badge station or project stand to open this website directly.</div>
+      </div>
+    </div>
+  </section>
+
   <section id="contact">
     <div class="contact-box">
       <h3>Ready to solve the case?</h3>
@@ -931,6 +1121,20 @@
   <footer>
     <p>© 2026 Holmes: The Final Case — 2D Sherlock Game Project</p>
   </footer>
+
+  <div id="trailerPopup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closeTrailerPopup()">&times;</span>
+      <h2>Trailer Coming Soon</h2>
+      <p>The final MP4 gameplay capsule will be added here after export.</p>
+      <p>Recommended format: 3 minutes, including intro, gameplay, team interventions and outro.</p>
+    </div>
+  </div>
+
+  <div id="lightboxPopup" class="popup">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <img id="lightboxImage" class="lightbox-img" src="" alt="Gallery preview">
+  </div>
 
   <div id="buyPopup" class="popup">
     <div class="popup-content">
@@ -962,6 +1166,17 @@
   </div>
 
   <script>
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+
+      if (section) {
+        section.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+
     const cards = document.querySelectorAll('.card, .member, .gallery-card, .text-box, .buy-card');
 
     const observer = new IntersectionObserver(entries => {
@@ -980,6 +1195,27 @@
       observer.observe(card);
     });
   
+    function showTrailerPopup() {
+      document.getElementById('trailerPopup').style.display = 'flex';
+    }
+
+    function closeTrailerPopup() {
+      document.getElementById('trailerPopup').style.display = 'none';
+    }
+
+    function openLightbox(imageSrc) {
+      document.getElementById('lightboxImage').src = imageSrc;
+      document.getElementById('lightboxPopup').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxPopup').style.display = 'none';
+    }
+
+    function toggleFaq(element) {
+      element.classList.toggle('active');
+    }
+
     function showBuyPopup() {
       document.getElementById('buyPopup').style.display = 'flex';
     }
