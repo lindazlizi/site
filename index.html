@@ -770,7 +770,7 @@
       <div class="buttons">
         <a class="btn" href="#story">Découvrir le jeu</a>
         <a class="btn dark" href="#buy">Voir les offres GD3</a>
-        <button class="btn" onclick="showTrailerPopup()">Voir le trailer</button>
+        <a class="btn" href="#trailer">Voir le trailer</a>      
       </div>
     </div>
 
@@ -1109,14 +1109,7 @@
     <p>© 2026 Holmes: The Final Case — 2D Sherlock Game Project</p>
   </footer>
 
-  <div id="trailerPopup" class="popup">
-    <div class="popup-content">
-      <span class="close" onclick="closeTrailerPopup()">&times;</span>
-      <h2>Trailer Coming Soon</h2>
-      <p>The final MP4 gameplay capsule will be added here after export.</p>
-      <p>Recommended format: 3 minutes, including intro, gameplay, team interventions and outro.</p>
-    </div>
-  </div>
+ 
 
   <div id="lightboxPopup" class="popup">
     <span class="close" onclick="closeLightbox()">&times;</span>
@@ -1190,10 +1183,6 @@
       document.getElementById('trailerPopup').style.display = 'none';
     }
 
-    function openLightbox(imageSrc) {
-      document.getElementById('lightboxImage').src = imageSrc;
-      document.getElementById('lightboxPopup').style.display = 'flex';
-    }
 
     function closeLightbox() {
       document.getElementById('lightboxPopup').style.display = 'none';
